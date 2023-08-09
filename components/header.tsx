@@ -6,11 +6,20 @@ import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
 
-import { useActiveSectionContext } from "@/context/active-section-context";
+import { SectionStore } from "@/lib/types";
+import { useSectionScroll } from "@/store/sectionScroll";
+import { shallow } from "zustand/shallow";
 
 export default function Header() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
-    useActiveSectionContext();
+    useSectionScroll(
+      (state: SectionStore) => ({
+        activeSection: state.activeSection,
+        setActiveSection: state.setActiveSection,
+        setTimeOfLastClick: state.setTimeOfLastClick,
+      }),
+      shallow
+    );
 
   return (
     <header className="z-[999] relative">
