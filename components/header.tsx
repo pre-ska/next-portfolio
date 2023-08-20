@@ -2,10 +2,10 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { links } from "@/lib/data";
 import Link from "next/link";
 import clsx from "clsx";
 
+import { links } from "@/lib/data";
 import { SectionStore } from "@/lib/types";
 import { useSectionScroll } from "@/store/sectionScroll";
 import { shallow } from "zustand/shallow";
