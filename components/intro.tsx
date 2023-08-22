@@ -7,14 +7,17 @@ import Link from "next/link";
 import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
+import clsx from "clsx";
 
 import { useSectionInView } from "@/lib/hooks";
 import { SectionStore } from "@/lib/types";
 import { useSectionScroll } from "@/store/sectionScroll";
 import { shallow } from "zustand/shallow";
+import { themeStateProp, useTheme } from "@/store/theme";
 
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
+  const isDark = useTheme((state: themeStateProp) => state.isDark);
 
   const { setActiveSection, setTimeOfLastClick } = useSectionScroll(
     (state: SectionStore) => ({
@@ -103,10 +106,12 @@ export default function Intro() {
         </Link>
 
         <a
-          className="group bg-white px-7 py-3 flex items-center gap-2 
-          rounded-full outline-none focus:scale-105 
-          hover:scale-110 active:scale-105 transition cursor-pointer 
-          borderBlack dark:bg-white/10"
+          className={clsx(
+            "group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-105 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack",
+            {
+              "bg-white/10": isDark,
+            }
+          )}
           href="/CV.pdf"
           download
         >
@@ -115,7 +120,12 @@ export default function Intro() {
         </a>
 
         <a
-          className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+          className={clsx(
+            "bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack",
+            {
+              "bg-white/10 text-white/60": isDark,
+            }
+          )}
           href="https://linkedin.com"
           target="_blank"
         >
@@ -123,7 +133,12 @@ export default function Intro() {
         </a>
 
         <a
-          className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+          className={clsx(
+            "bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack",
+            {
+              "bg-white/10  text-white/60": isDark,
+            }
+          )}
           href="https://github.com"
           target="_blank"
         >

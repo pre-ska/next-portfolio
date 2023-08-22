@@ -5,6 +5,7 @@ import SectionHeading from "./section-heading";
 import { skillsData } from "@/lib/data";
 import { useSectionInView } from "@/lib/hooks";
 import { motion } from "framer-motion";
+import { themeStateProp, useTheme } from "@/store/theme";
 
 const fadeInAnimationVariants = {
   initial: {
@@ -22,6 +23,7 @@ const fadeInAnimationVariants = {
 
 export default function Skills() {
   const { ref } = useSectionInView("Skills", 0.5);
+  const isDark = useTheme((state: themeStateProp) => state.isDark);
 
   return (
     <section
@@ -33,8 +35,9 @@ export default function Skills() {
       <ul className="flex flex-wrap justify-center gap-2 text-lg text-gray-800">
         {skillsData.map((skill, index) => (
           <motion.li
-            className="bg-slate-200 border-slate-950/100 border-1 rounded-xl px-5 py-3 
-            dark:bg-white/10 dark:text-white/80"
+            className={`bg-slate-200 border-slate-950/100 border-1 rounded-xl px-5 py-3 ${
+              isDark ? "text-white/80 bg-white/10 " : ""
+            } `}
             key={index}
             variants={fadeInAnimationVariants}
             initial="initial"
